@@ -5,6 +5,10 @@
 function duplicateRemoval (arr) {
   return [...new Set(arr)]
 }
+/**
+ * 第一种方法 超出最大时间限制
+ * @param {String} s 
+ */
 var lengthOfLongestSubstring = function(s) {
   const length = s.length;
 
@@ -30,3 +34,25 @@ var lengthOfLongestSubstring = function(s) {
       }
   }
 };
+/**
+ * 第二种方法 滑动窗口
+ * @param {String} s 
+ */
+var lengthOfLongestSubstring = function (s) {
+    const length = s.length;
+    const tempArr = [];
+    let max = 0;
+    for (let i = 0; i < length; i ++) {
+        let tempStr = s[i];
+        const index = tempArr.indexOf(tempStr)
+        if (index !== -1) {
+            tempArr.splice(0, index + 1)
+        }
+        tempArr.push(tempStr);
+        max = Math.max(max, tempArr.length)
+    }
+
+    return max
+}
+
+console.log('lengthOfLongestSubstring', lengthOfLongestSubstring('abcadca'));
